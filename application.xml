@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/3.5">
   <id>com.ukuleledog.games.sonic.Sonic</id>
-  <versionNumber>1.0.2</versionNumber>
+  <versionNumber>1.0.59</versionNumber>
   <filename>Sonic</filename>
   <name>Sonic</name>
   <description>
@@ -15,8 +15,8 @@
     <transparent>false</transparent>
     <visible>true</visible>
     <minimizable>true</minimizable>
-    <maximizable>true</maximizable>
-    <resizable>true</resizable>
+    <maximizable>false</maximizable>
+    <resizable>false</resizable>
   </initialWindow>
   <!-- 
 	More options:

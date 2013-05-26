@@ -34,29 +34,17 @@ package com.ukuleledog.games.sonic
 			{
 				switch( pressedKey )
 				{
-					case Keyboard.A:
-						_currentLevel.sonic.animation = 'idle';
-						break;
-					case Keyboard.Z:
-						_currentLevel.sonic.animation = 'wait';
-						break;
-					case Keyboard.E:
-						_currentLevel.sonic.animation = 'down';
-						break;
-					case Keyboard.R:
-						_currentLevel.sonic.animation = 'jump';
-						break;
-					case Keyboard.T:
-						_currentLevel.sonic.animation = 'walk';
-						break;
-					case Keyboard.Y:
-						_currentLevel.sonic.animation = 'run';
-						break;
 					case Keyboard.RIGHT:
 						_currentLevel.sonic.moveRight();
 						break;
 					case Keyboard.LEFT:
 						_currentLevel.sonic.moveLeft();
+						break;
+					case Keyboard.SPACE:
+						_currentLevel.sonic.jump();
+						break;
+					case Keyboard.DOWN:
+						_currentLevel.sonic.crouch();
 						break;
 				}
 			}

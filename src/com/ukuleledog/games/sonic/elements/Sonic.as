@@ -1,6 +1,7 @@
 package com.ukuleledog.games.sonic.elements 
 {
 	import com.ukuleledog.games.sonic.Ressources;
+	import flash.display.AVM1Movie;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
@@ -13,7 +14,7 @@ package com.ukuleledog.games.sonic.elements
 	 * ...
 	 * @author matt
 	 */
-	public class Sonic extends Sprite
+	public class Sonic extends Element
 	{
 		
 		private var _spritesheet:Bitmap;	
@@ -27,6 +28,8 @@ package com.ukuleledog.games.sonic.elements
 		private var _framerate:uint = 250;
 		private var _speed:uint = 5;
 		private var _inverted:Boolean = false;
+		private var _onGround:Boolean = false;
+		private var _jumping:Boolean = false;
 		
 		private var _animationTimer:Timer = new Timer(250);
 		private var _animationChangeTimer:Timer = new Timer(1000);
@@ -68,9 +71,9 @@ package com.ukuleledog.games.sonic.elements
 					break;
 				case 'down':
 					_frames = 1;
-					_offsetY = 8;
+					_offsetY = 21;
 					_offsetX = 157;
-					_height = 39;
+					_height = 26;
 					_width = 30;
 					_framerate = 0;
 					break;
@@ -89,10 +92,10 @@ package com.ukuleledog.games.sonic.elements
 					_height = 39;
 					_width = 34;
 					_framerate = 100;
-					trace('walk');
 					_animationChangeTimer.delay = 1000;
 					_animationChangeTimer.addEventListener( TimerEvent.TIMER, animationChange );
 					_animationChangeTimer.start();
+					_speed = 5;
 					break;
 				case 'run':
 					_frames = 4;
@@ -101,6 +104,7 @@ package com.ukuleledog.games.sonic.elements
 					_height = 35;
 					_width = 34;
 					_framerate = 100;
+					_speed = 15;
 					break;
 			}
 			
@@ -162,37 +166,61 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function moveRight() : void
 		{
-			//this.x += _speed;
-			if ( _animation != 'walk' && _animation != 'run' )
-			animation = 'walk';
+			if ( _onGround )
+			{
+				this.x += _speed;
+				if ( _animation != 'walk' && _animation != 'run' )
+				animation = 'walk';
+			}
 			_inverted = false;
 		}
 		
 		public function moveLeft() : void
 		{
-			//this.x -= _speed;
-			if ( _animation != 'walk' && _animation != 'run' )
-			animation = 'walk';
+			if ( _onGround )
+			{
+				this.x -= _speed;
+				if ( _animation != 'walk' && _animation != 'run' )
+				animation = 'walk';
+			}
 			_inverted = true;
+		}
+		
+		public function jump() : void
+		{
+			if ( _onGround == true && _jumping == false )
+			{
+				_jumping = true;
+				_onGround = false;
+				animation = 'jump';
+			}
+		}
+		
+		public function crouch() : void
+		{
+			if ( _onGround  )
+			animation = 'down';
 		}
 		
 		public function loop() : void
 		{
+			trace(_jumping);
+			if ( _jumping )
+				this.y--;
+		}
+	
+		public function set onGround( value:Boolean ) : void
+		{
+			_onGround = value;
 			
-			trace(_currentFrame);
-			
-			switch( _animation )
-			{
-				case 'idle':
-					if ( _currentFrame >= 120 )
-					animation = 'wait';
-					break;
-				case 'wait':
-					if ( _currentFrame >= 60 )
-					animation = 'idle';
-					break;
-			}
-			
+			if ( _jumping )
+			_jumping = false;
+		}
+		
+		public function fall() : void
+		{
+			if ( !_jumping )
+			this.y += _speed;
 		}
 		
 	}
