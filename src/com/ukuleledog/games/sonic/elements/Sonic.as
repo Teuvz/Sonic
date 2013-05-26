@@ -27,6 +27,8 @@ package com.ukuleledog.games.sonic.elements
 		private var _width:uint = 0;
 		private var _framerate:uint = 250;
 		private var _speed:uint = 5;
+		private var _fallSpeed:uint = 5;
+		private var _fallSpeedMax:uint = 30;
 		private var _inverted:Boolean = false;
 		private var _onGround:Boolean = false;
 		private var _jumping:Boolean = false;
@@ -166,7 +168,8 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function moveRight() : void
 		{
-			if ( _onGround )
+			//if ( _onGround )
+			if ( true )
 			{
 				this.x += _speed;
 				if ( _animation != 'walk' && _animation != 'run' )
@@ -177,7 +180,8 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function moveLeft() : void
 		{
-			if ( _onGround )
+			//if ( _onGround )
+			if ( true )
 			{
 				this.x -= _speed;
 				if ( _animation != 'walk' && _animation != 'run' )
@@ -204,7 +208,6 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function loop() : void
 		{
-			trace(_jumping);
 			if ( _jumping )
 				this.y--;
 		}
@@ -213,14 +216,28 @@ package com.ukuleledog.games.sonic.elements
 		{
 			_onGround = value;
 			
-			if ( _jumping )
-			_jumping = false;
+			if ( _onGround == true )
+			{
+				if ( _jumping )
+					_jumping = false;
+					
+				_fallSpeed = 5;
+			}
 		}
 		
 		public function fall() : void
 		{
 			if ( !_jumping )
-			this.y += _speed;
+			{
+				this.y += _fallSpeed;
+				
+				/*if ( _fallSpeed < _fallSpeedMax )
+				{
+					_fallSpeed++;
+				}*/
+				
+			}
+			
 		}
 		
 	}

@@ -1,5 +1,6 @@
 package com.ukuleledog.games.sonic.elements 
 {
+	import com.ukuleledog.games.sonic.events.LevelEvent;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	/**
@@ -11,6 +12,7 @@ package com.ukuleledog.games.sonic.elements
 		
 		private var _sonic:Sonic;
 		private var _colliderElements:Vector.<Element>;
+		private var _running:Boolean = false;
 		
 		public function Level() 
 		{
@@ -34,13 +36,24 @@ package com.ukuleledog.games.sonic.elements
 			_sonic.x = (stage.stageWidth / 2) - (_sonic.width / 2);
 			addChild( _sonic );
 			
+			_running = true;
 		}
 		
 		public function loop() : void
 		{
-			collide();
-			moveCamera();
-			_sonic.loop();
+			
+			if ( _running )
+			{
+				collide();
+				moveCamera();
+				_sonic.loop();
+				
+				if ( _sonic.y > stage.stageHeight )
+				{
+					_running = false;
+					dispatchEvent( new LevelEvent( LevelEvent.RESTART ) );
+				}
+			}
 		}
 		
 		private function collide() : void
