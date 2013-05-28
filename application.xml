@@ -31,6 +31,13 @@
   <allowBrowserInvocation>false</allowBrowserInvocation>
   <customUpdateUI>false</customUpdateUI>
   <icon>
+    <image16x16>icons/16.png</image16x16>
+    <image32x32>icons/32.png</image32x32>
+    <image48x48>icons/48.png</image48x48>
+	<image50x50>icons/50.png</image50x50>
+    <image58x58>icons/58.png</image58x58>
+    <image72x72>icons/72.png</image72x72>
+    <image100x100>icons/100.png</image100x100>
   </icon>
   <supportedLanguages>fr</supportedLanguages>
 </application>

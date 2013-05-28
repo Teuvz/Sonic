@@ -1,5 +1,5 @@
 # Build and Release Folders
-bin/
+bin/*.swf
 air/
 bin-debug/
 bin-release/
