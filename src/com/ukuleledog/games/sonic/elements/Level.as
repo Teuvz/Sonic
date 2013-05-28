@@ -24,13 +24,31 @@ package com.ukuleledog.games.sonic.elements
 			this.removeEventListener(Event.ADDED_TO_STAGE, init );
 		
 			_colliderElements = new Vector.<Element>();
-			var floor:Ground = new Ground();
+			var floor:Element = new Element();
 			floor.graphics.beginFill( 0x00AA00, 0.5);
 			floor.graphics.drawRect( 0, 0, stage.stageWidth*4, stage.stageHeight / 2 );
 			floor.graphics.endFill();
 			floor.y = stage.stageHeight / 2;
+			floor.name = "floor";
 			addChild( floor );
 			_colliderElements.push(floor);
+			
+			var wall:Element = new Element();
+			wall.graphics.beginFill( 0xFF0000, 0.5 );
+			wall.graphics.drawRect( 0, 0, 30, 800 );
+			wall.graphics.endFill();
+			wall.name = "wall";
+			addChild( wall );
+			_colliderElements.push(wall);
+			
+			var wall2:Element = new Element();
+			wall2.graphics.beginFill( 0xFF0000, 0.5 );
+			wall2.graphics.drawRect( 0, 0, 30, 800 );
+			wall2.graphics.endFill();
+			wall2.name = "wall2";
+			wall2.x = 500;
+			addChild( wall2 );
+			_colliderElements.push(wall2);
 			
 			_sonic = new Sonic();
 			_sonic.x = (stage.stageWidth / 2) - (_sonic.width / 2);
@@ -44,7 +62,7 @@ package com.ukuleledog.games.sonic.elements
 			
 			if ( _running )
 			{
-				collide();
+				collideVertical();
 				moveCamera();
 				_sonic.loop();
 				
@@ -56,7 +74,7 @@ package com.ukuleledog.games.sonic.elements
 			}
 		}
 		
-		private function collide() : void
+		private function collideVertical() : void
 		{
 			
 			var i:uint = _colliderElements.length;
@@ -96,6 +114,66 @@ package com.ukuleledog.games.sonic.elements
 		{	
 			this.x = (stage.stageWidth / 2) - _sonic.x - (_sonic.width/2);
 			//this.y = (stage.stageHeight / 2) - _sonic.y - (_sonic.height / 2);
+		}
+		
+		public function moveLeft() : void
+		{
+			
+			var canMove:Boolean = true;
+			var i:uint = _colliderElements.length;
+			
+			while ( --i >= 0 )
+			{
+				if ( 
+					_sonic.x < ( _colliderElements[i].x + _colliderElements[i].width ) &&
+					_colliderElements[i].x < _sonic.x && 
+					_colliderElements[i].y < _sonic.y && 
+					(_colliderElements[i].y + _colliderElements[i].height) > (_sonic.y + _sonic.height )
+				)
+				{
+					_sonic.animation = "push";
+					canMove = false;
+					break;
+				}
+			}
+			
+			if ( canMove )
+				_sonic.moveLeft();
+			
+		}
+		
+		public function moveRight() : void
+		{
+			var canMove:Boolean = true;
+			var i:uint = _colliderElements.length;
+			
+			while ( --i >= 0 )
+			{
+				if ( 
+					_colliderElements[i].x < ( _sonic.x + _sonic.width ) &&
+					_colliderElements[i].x > _sonic.x && 
+					_colliderElements[i].y < _sonic.y && 
+					(_colliderElements[i].y + _colliderElements[i].height) > (_sonic.y + _sonic.height )
+				)
+				{
+					_sonic.animation = "push";
+					canMove = false;
+					break;
+				}
+			}
+			
+			if ( canMove )
+				_sonic.moveRight();
+		}
+		
+		public function jump() : void
+		{
+			_sonic.jump();
+		}
+		
+		public function crouch() : void
+		{
+			_sonic.crouch();
 		}
 		
 	}

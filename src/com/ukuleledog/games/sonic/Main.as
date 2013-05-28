@@ -9,6 +9,7 @@ package com.ukuleledog.games.sonic
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
+	import net.hires.debug.Stats;
 	
 	/**
 	 * ...
@@ -22,11 +23,17 @@ package com.ukuleledog.games.sonic
 		
 		private var _currentLevel:Level;
 		
+		private var _stats:Stats;
+		
 		public function Main():void 
 		{
 			/*_currentLevel = new Level();
 			addChild(_currentLevel);
 			_currentLevel.addEventListener( LevelEvent.RESTART, levelRestart );*/
+			
+			_stats = new Stats();
+			addChild( _stats );
+			
 			levelRestart();
 			
 			addEventListener( Event.ENTER_FRAME, loop );
@@ -75,16 +82,16 @@ package com.ukuleledog.games.sonic
 				switch( pressedKey )
 				{
 					case Keyboard.RIGHT:
-						_currentLevel.sonic.moveRight();
+						_currentLevel.moveRight();
 						break;
 					case Keyboard.LEFT:
-						_currentLevel.sonic.moveLeft();
+						_currentLevel.moveLeft();
 						break;
 					case Keyboard.SPACE:
-						_currentLevel.sonic.jump();
+						_currentLevel.jump();
 						break;
 					case Keyboard.DOWN:
-						_currentLevel.sonic.crouch();
+						_currentLevel.crouch();
 						break;
 				}
 			}

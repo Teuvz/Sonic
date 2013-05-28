@@ -3,11 +3,10 @@
   <id>com.ukuleledog.games.sonic.Sonic</id>
   <versionNumber>1.0.59</versionNumber>
   <filename>Sonic</filename>
-  <name>Sonic</name>
-  <description>
-  </description>
-  <copyright>
-  </copyright>
+  <name>
+    <text xml:lang="fr">Sonic</text>
+  </name>
+  <copyright>Ukulele Dog</copyright>
   <initialWindow>
     <title>Sonic</title>
     <content>Sonic.swf</content>
@@ -17,9 +16,21 @@
     <minimizable>true</minimizable>
     <maximizable>false</maximizable>
     <resizable>false</resizable>
+    <aspectRatio>landscape</aspectRatio>
+    <renderMode>direct</renderMode>
   </initialWindow>
   <!-- 
 	More options:
 	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
 	-->
+  <description>
+    <text xml:lang="fr">
+    </text>
+  </description>
+  <supportedProfiles>desktop mobileDevice</supportedProfiles>
+  <allowBrowserInvocation>false</allowBrowserInvocation>
+  <customUpdateUI>false</customUpdateUI>
+  <icon>
+  </icon>
+  <supportedLanguages>fr</supportedLanguages>
 </application>

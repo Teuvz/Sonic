@@ -26,8 +26,8 @@ package com.ukuleledog.games.sonic.elements
 		private var _height:uint = 0;
 		private var _width:uint = 0;
 		private var _framerate:uint = 250;
-		private var _speed:uint = 5;
-		private var _fallSpeed:uint = 5;
+		private var _speed:uint = 7;
+		private var _fallSpeed:uint = 10;
 		private var _fallSpeedMax:uint = 30;
 		private var _inverted:Boolean = false;
 		private var _onGround:Boolean = false;
@@ -97,7 +97,7 @@ package com.ukuleledog.games.sonic.elements
 					_animationChangeTimer.delay = 1000;
 					_animationChangeTimer.addEventListener( TimerEvent.TIMER, animationChange );
 					_animationChangeTimer.start();
-					_speed = 5;
+					_speed = 7;
 					break;
 				case 'run':
 					_frames = 4;
@@ -106,7 +106,15 @@ package com.ukuleledog.games.sonic.elements
 					_height = 35;
 					_width = 34;
 					_framerate = 100;
-					_speed = 15;
+					_speed = 20;
+					break;
+				case 'push':
+					_frames = 1;
+					_offsetY = 263;
+					_offsetX = 8;
+					_height = 37;
+					_width = 25;
+					_framerate = 100;
 					break;
 			}
 			
