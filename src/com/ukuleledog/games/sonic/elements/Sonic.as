@@ -32,6 +32,7 @@ package com.ukuleledog.games.sonic.elements
 		private var _inverted:Boolean = false;
 		private var _onGround:Boolean = false;
 		private var _jumping:Boolean = false;
+		private var _jumpToY:uint = 0;
 		
 		private var _animationTimer:Timer = new Timer(250);
 		private var _animationChangeTimer:Timer = new Timer(1000);
@@ -42,6 +43,11 @@ package com.ukuleledog.games.sonic.elements
 			animation = 'idle';
 			this.scaleX = 2;
 			this.scaleY = 2;
+		}
+		
+		public function get waiting() : Boolean
+		{
+			return (_animation == 'wait' || _animation == 'idle');
 		}
 		
 		public function set animation( name:String ) : void
@@ -205,19 +211,25 @@ package com.ukuleledog.games.sonic.elements
 				_jumping = true;
 				_onGround = false;
 				animation = 'jump';
+				_jumpToY = y - 100;
 			}
 		}
 		
 		public function crouch() : void
 		{
 			if ( _onGround  )
-			animation = 'down';
+				animation = 'down';
 		}
 		
 		public function loop() : void
 		{
 			if ( _jumping )
-				this.y--;
+			{
+				if ( y > _jumpToY )
+					this.y -= _fallSpeed * 1.5;
+				else 
+					_jumping = false;
+			}
 		}
 	
 		public function set onGround( value:Boolean ) : void
@@ -237,13 +249,7 @@ package com.ukuleledog.games.sonic.elements
 		{
 			if ( !_jumping )
 			{
-				this.y += _fallSpeed;
-				
-				/*if ( _fallSpeed < _fallSpeedMax )
-				{
-					_fallSpeed++;
-				}*/
-				
+				this.y += _fallSpeed;				
 			}
 			
 		}

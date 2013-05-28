@@ -9,6 +9,7 @@ package com.ukuleledog.games.sonic
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
+	import flash.utils.Dictionary;
 	import net.hires.debug.Stats;
 	
 	/**
@@ -19,7 +20,7 @@ package com.ukuleledog.games.sonic
 	{
 	
 		private var keyPressed:Boolean = false;
-		private var pressedKey:uint;
+		private var pressedKeys:Dictionary = new Dictionary();
 		
 		private var _currentLevel:Level;
 		
@@ -76,25 +77,27 @@ package com.ukuleledog.games.sonic
 		
 		private function loop( e:Event ) : void
 		{
-						
-			if ( keyPressed )
-			{
-				switch( pressedKey )
-				{
-					case Keyboard.RIGHT:
-						_currentLevel.moveRight();
-						break;
-					case Keyboard.LEFT:
-						_currentLevel.moveLeft();
-						break;
-					case Keyboard.SPACE:
-						_currentLevel.jump();
-						break;
-					case Keyboard.DOWN:
-						_currentLevel.crouch();
-						break;
-				}
+	
+			keyPressed = false;
+			
+			if ( pressedKeys[Keyboard.RIGHT] == true ) {
+				_currentLevel.moveRight();
+				keyPressed = true;
+			} else if ( pressedKeys[Keyboard.LEFT] == true ) {
+				_currentLevel.moveLeft();
+				keyPressed = true;
 			}
+			
+			if ( pressedKeys[Keyboard.SPACE] == true ) {
+				_currentLevel.jump();
+				keyPressed = true;
+			} else if ( pressedKeys[Keyboard.DOWN] == true ) {
+				_currentLevel.crouch();
+				keyPressed = true;
+			}
+			
+			if ( !keyPressed && !_currentLevel.sonic.waiting )
+				_currentLevel.sonic.animation = 'idle';
 			
 			_currentLevel.loop();
 			
@@ -102,14 +105,12 @@ package com.ukuleledog.games.sonic
 		
 		private function onKeyUp( e:KeyboardEvent ) : void
 		{
-			keyPressed = false;
-			_currentLevel.sonic.animation = 'idle';
+			pressedKeys[e.keyCode] = false;
 		}
 		
 		private function onKeyDown( e:KeyboardEvent )  : void
 		{
-			keyPressed = true;
-			pressedKey = e.keyCode;
+			pressedKeys[e.keyCode] = true;
 		}
 		
 	}
