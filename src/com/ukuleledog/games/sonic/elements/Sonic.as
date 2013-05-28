@@ -16,6 +16,9 @@ package com.ukuleledog.games.sonic.elements
 	 */
 	public class Sonic extends Element
 	{
+
+		private const _speedWalk:uint = 20;
+		private const _speedRun:uint = 40;
 		
 		private var _spritesheet:Bitmap;	
 		private var _animation:String;
@@ -48,6 +51,14 @@ package com.ukuleledog.games.sonic.elements
 		public function get waiting() : Boolean
 		{
 			return (_animation == 'wait' || _animation == 'idle');
+		}
+		
+		public function set jumping( value:Boolean ) : void
+		{
+			if ( value == true )
+				jump();
+			else
+				_jumping = false;
 		}
 		
 		public function set animation( name:String ) : void
@@ -103,7 +114,7 @@ package com.ukuleledog.games.sonic.elements
 					_animationChangeTimer.delay = 1000;
 					_animationChangeTimer.addEventListener( TimerEvent.TIMER, animationChange );
 					_animationChangeTimer.start();
-					_speed = 7;
+					_speed = _speedWalk;
 					break;
 				case 'run':
 					_frames = 4;
@@ -112,7 +123,7 @@ package com.ukuleledog.games.sonic.elements
 					_height = 35;
 					_width = 34;
 					_framerate = 100;
-					_speed = 20;
+					_speed = _speedRun;
 					break;
 				case 'push':
 					_frames = 1;

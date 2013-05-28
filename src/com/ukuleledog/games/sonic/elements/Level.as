@@ -133,6 +133,8 @@ package com.ukuleledog.games.sonic.elements
 				{
 					_sonic.animation = "push";
 					canMove = false;
+					_sonic.jumping = false;
+					_sonic.x = (_colliderElements[i].x + _colliderElements[i].width ) - 1;
 					break;
 				}
 			}
@@ -158,6 +160,8 @@ package com.ukuleledog.games.sonic.elements
 				{
 					_sonic.animation = "push";
 					canMove = false;
+					_sonic.jumping = false;
+					_sonic.x = (_colliderElements[i].x - _sonic.width ) + 1;
 					break;
 				}
 			}

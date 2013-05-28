@@ -1,11 +1,15 @@
 package com.ukuleledog.games.sonic
 {
+	import air.update.ApplicationUpdater;
+	import air.update.events.UpdateEvent;
 	import com.ukuleledog.games.sonic.elements.Level;
 	import com.ukuleledog.games.sonic.elements.Sonic;
 	import com.ukuleledog.games.sonic.events.LevelEvent;
 	import flash.display.Sprite;
+	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.filesystem.File;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
@@ -26,8 +30,10 @@ package com.ukuleledog.games.sonic
 		
 		private var _stats:Stats;
 		
+		private var appUpdater:ApplicationUpdater = new ApplicationUpdater();
+		
 		public function Main():void 
-		{
+		{			
 			/*_currentLevel = new Level();
 			addChild(_currentLevel);
 			_currentLevel.addEventListener( LevelEvent.RESTART, levelRestart );*/
@@ -41,7 +47,7 @@ package com.ukuleledog.games.sonic
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
 		}
-		
+	
 		private function levelRestart( e:LevelEvent = null ) : void
 		{
 			
