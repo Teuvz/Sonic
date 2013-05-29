@@ -53,6 +53,11 @@ package com.ukuleledog.games.sonic.elements
 			return (_animation == 'wait' || _animation == 'idle');
 		}
 		
+		public function get crouching() : Boolean
+		{
+			return _animation == 'down';
+		}
+		
 		public function set jumping( value:Boolean ) : void
 		{
 			if ( value == true )

@@ -6,6 +6,10 @@ package com.ukuleledog.games.sonic
 	import com.ukuleledog.games.sonic.elements.Level;
 	import com.ukuleledog.games.sonic.elements.Sonic;
 	import com.ukuleledog.games.sonic.events.LevelEvent;
+	import com.ukuleledog.games.sonic.events.MenuEvent;
+	import com.ukuleledog.games.sonic.states.GameState;
+	import com.ukuleledog.games.sonic.states.MenuState;
+	import com.ukuleledog.games.sonic.states.State;
 	import flash.display.Sprite;
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
@@ -27,13 +31,15 @@ package com.ukuleledog.games.sonic
 		private var _stats:Stats;	
 		private var appUpdater:ApplicationUpdaterUI = new ApplicationUpdaterUI();
 		
-		private var _currentState:GameState;
+		private var _currentState:State;
 		
 		public function Main():void 
-		{						
+		{		
 			checkForUpdate();	
 			
-			_currentState = new GameState();
+			stage.frameRate = 3;
+			_currentState = new MenuState();
+			_currentState.addEventListener( MenuEvent.MENU_START, menuStartHandle );
 			addChild( _currentState );
 			
 			if ( CONFIG::debug ) {
@@ -46,6 +52,16 @@ package com.ukuleledog.games.sonic
 		{
 			appUpdater.configurationFile = new File("app:/updateConfig.xml"); 
 			appUpdater.initialize();
+		}
+		
+		private function menuStartHandle( e:MenuEvent ) : void
+		{
+			_currentState.removeEventListener( MenuEvent.MENU_START, menuStartHandle );
+			removeChild( _currentState );
+			_currentState = null;
+			_currentState = new GameState();
+			stage.frameRate = 30;
+			addChild( _currentState );
 		}
 		
 	}

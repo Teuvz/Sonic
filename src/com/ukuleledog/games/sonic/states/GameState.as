@@ -1,4 +1,4 @@
-package com.ukuleledog.games.sonic 
+package com.ukuleledog.games.sonic.states 
 {
 	import com.ukuleledog.games.sonic.elements.Level;
 	import com.ukuleledog.games.sonic.events.LevelEvent;
@@ -15,7 +15,7 @@ package com.ukuleledog.games.sonic
 	 * ...
 	 * @author matt
 	 */
-	public class GameState extends Sprite 
+	public class GameState extends State
 	{
 		
 		private var keyPressed:Boolean = false;
@@ -78,19 +78,19 @@ package com.ukuleledog.games.sonic
 	
 			keyPressed = false;
 			
-			if ( pressedKeys[Keyboard.RIGHT] == true ) {
-				_currentLevel.moveRight();
+			if ( pressedKeys[Keyboard.DOWN] == true ) {
+				_currentLevel.crouch();
 				keyPressed = true;
 			} else if ( pressedKeys[Keyboard.LEFT] == true ) {
 				_currentLevel.moveLeft();
 				keyPressed = true;
+			} else if ( pressedKeys[Keyboard.RIGHT] == true ) {
+				_currentLevel.moveRight();
+				keyPressed = true;
 			}
 			
-			if ( pressedKeys[Keyboard.SPACE] == true ) {
+			if ( pressedKeys[Keyboard.SPACE] == true && !_currentLevel.sonic.crouching) {
 				_currentLevel.jump();
-				keyPressed = true;
-			} else if ( pressedKeys[Keyboard.DOWN] == true ) {
-				_currentLevel.crouch();
 				keyPressed = true;
 			}
 			
