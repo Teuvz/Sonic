@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/3.5">
   <id>com.ukuleledog.games.sonic.Sonic</id>
-  <versionNumber>1.0.59</versionNumber>
+  <versionNumber>1.0.60</versionNumber>
   <filename>Sonic</filename>
   <name>
     <text xml:lang="fr">Sonic</text>
@@ -29,12 +29,12 @@
   </description>
   <supportedProfiles>desktop mobileDevice</supportedProfiles>
   <allowBrowserInvocation>false</allowBrowserInvocation>
-  <customUpdateUI>false</customUpdateUI>
+  <customUpdateUI>true</customUpdateUI>
   <icon>
     <image16x16>icons/16.png</image16x16>
     <image32x32>icons/32.png</image32x32>
     <image48x48>icons/48.png</image48x48>
-	<image50x50>icons/50.png</image50x50>
+    <image50x50>icons/50.png</image50x50>
     <image58x58>icons/58.png</image58x58>
     <image72x72>icons/72.png</image72x72>
     <image100x100>icons/100.png</image100x100>

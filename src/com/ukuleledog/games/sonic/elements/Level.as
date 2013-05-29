@@ -46,7 +46,7 @@ package com.ukuleledog.games.sonic.elements
 			wall2.graphics.drawRect( 0, 0, 30, 800 );
 			wall2.graphics.endFill();
 			wall2.name = "wall2";
-			wall2.x = 500;
+			wall2.x = 1500;
 			addChild( wall2 );
 			_colliderElements.push(wall2);
 			
