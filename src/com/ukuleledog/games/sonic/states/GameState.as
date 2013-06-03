@@ -2,9 +2,11 @@ package com.ukuleledog.games.sonic.states
 {
 	import com.ukuleledog.games.sonic.elements.Level;
 	import com.ukuleledog.games.sonic.events.LevelEvent;
+	import com.ukuleledog.games.sonic.Ressources;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.media.Sound;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
@@ -22,7 +24,7 @@ package com.ukuleledog.games.sonic.states
 		private var pressedKeys:Dictionary = new Dictionary();
 		
 		private var _currentLevel:Level;
-		
+				
 		public function GameState() 
 		{
 			super();
@@ -38,11 +40,11 @@ package com.ukuleledog.games.sonic.states
 			addEventListener( Event.ENTER_FRAME, loop );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+			
 		}
 		
 		private function levelRestart( e:LevelEvent = null ) : void
 		{
-			
 			var loadingScreen:Sprite = new Sprite();
 			loadingScreen.graphics.beginFill( 0x000000 );
 			loadingScreen.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight );

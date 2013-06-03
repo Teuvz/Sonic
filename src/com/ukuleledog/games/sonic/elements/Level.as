@@ -1,5 +1,6 @@
 package com.ukuleledog.games.sonic.elements 
 {
+	import com.ukuleledog.games.sonic.blocks.Block;
 	import com.ukuleledog.games.sonic.events.LevelEvent;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -23,30 +24,53 @@ package com.ukuleledog.games.sonic.elements
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, init );
 		
+			var block1:Block = new Block( 1, 'lala' );
+			addChild(block1);
+			var block2:Block = new Block( 2, 'lala' );
+			block2.x = stage.stageWidth;
+			addChild(block2);
+			var block3:Block = new Block( 3, 'lala' );
+			block3.x = stage.stageWidth*2;
+			addChild(block3);
+			var block4:Block = new Block( 4, 'lala' );
+			block4.x = stage.stageWidth*3;
+			addChild(block4);
+			var block5:Block = new Block( 5, 'lala' );
+			block5.x = stage.stageWidth*4;
+			addChild(block5);
+			var block6:Block = new Block( 6, 'lala' );
+			block6.x = stage.stageWidth*5;
+			addChild(block6);
+			var block7:Block = new Block( 7, 'lala' );
+			block7.x = stage.stageWidth*6;
+			addChild(block7);
+						
 			_colliderElements = new Vector.<Element>();
 			var floor:Element = new Element();
 			floor.graphics.beginFill( 0x00AA00, 0.5);
-			floor.graphics.drawRect( 0, 0, stage.stageWidth*4, stage.stageHeight / 2 );
+			floor.graphics.drawRect( 0, 0, stage.stageWidth*7, stage.stageHeight / 2 );
 			floor.graphics.endFill();
-			floor.y = stage.stageHeight / 2;
+			floor.y = 400;
 			floor.name = "floor";
+			floor.visible = false;
 			addChild( floor );
 			_colliderElements.push(floor);
 			
 			var wall:Element = new Element();
 			wall.graphics.beginFill( 0xFF0000, 0.5 );
-			wall.graphics.drawRect( 0, 0, 30, 800 );
+			wall.graphics.drawRect( 0, 0, 60, 800 );
 			wall.graphics.endFill();
 			wall.name = "wall";
+			wall.x -= 30;
 			addChild( wall );
 			_colliderElements.push(wall);
 			
 			var wall2:Element = new Element();
 			wall2.graphics.beginFill( 0xFF0000, 0.5 );
-			wall2.graphics.drawRect( 0, 0, 30, 800 );
+			wall2.graphics.drawRect( 0, 0, 60, 800 );
 			wall2.graphics.endFill();
 			wall2.name = "wall2";
-			wall2.x = 1500;
+			wall2.x = stage.stageWidth*7 - 30;
 			addChild( wall2 );
 			_colliderElements.push(wall2);
 			

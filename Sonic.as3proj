@@ -51,6 +51,8 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\Stats.swc" />
+    <element path="lib\sonic.swc" />
+    <element path="lib\assets.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

@@ -9,6 +9,7 @@ package com.ukuleledog.games.sonic.states
 	import flash.events.KeyboardEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.media.Sound;
 	import flash.ui.Keyboard;
 	
 	/**
@@ -19,6 +20,7 @@ package com.ukuleledog.games.sonic.states
 	{
 	
 		private var _spriteSheet:Bitmap = new Ressources.START_MENU();
+		
 		private var _sonic:Sprite;
 		private var _sonicFrame:uint = 0;
 		
@@ -67,6 +69,7 @@ package com.ukuleledog.games.sonic.states
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			
 			addEventListener(Event.ENTER_FRAME, loop);
+			
 		}
 		
 		private function destroy( e:Event ) : void

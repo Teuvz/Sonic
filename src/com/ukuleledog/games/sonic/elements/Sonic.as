@@ -4,6 +4,7 @@ package com.ukuleledog.games.sonic.elements
 	import flash.display.AVM1Movie;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.TimerEvent;
 	import flash.geom.Matrix;
@@ -20,16 +21,10 @@ package com.ukuleledog.games.sonic.elements
 		private const _speedWalk:uint = 20;
 		private const _speedRun:uint = 40;
 		
-		private var _spritesheet:Bitmap;	
+		private var _view:MovieClip;
+		
 		private var _animation:String;
-		private var _frames:uint = 0;
-		private var _currentFrame:uint = 0;
-		private var _offsetX:uint = 0;
-		private var _offsetY:uint = 0;
-		private var _height:uint = 0;
-		private var _width:uint = 0;
-		private var _framerate:uint = 250;
-		private var _speed:uint = 7;
+		private var _speed:uint = 20;
 		private var _fallSpeed:uint = 10;
 		private var _fallSpeedMax:uint = 30;
 		private var _inverted:Boolean = false;
@@ -37,15 +32,15 @@ package com.ukuleledog.games.sonic.elements
 		private var _jumping:Boolean = false;
 		private var _jumpToY:uint = 0;
 		
-		private var _animationTimer:Timer = new Timer(250);
 		private var _animationChangeTimer:Timer = new Timer(1000);
 		
 		public function Sonic() 
 		{
-			_spritesheet = new Ressources.SONIC();
+			_view = new asset_sonic();
 			animation = 'idle';
 			this.scaleX = 2;
 			this.scaleY = 2;
+			addChild(_view);
 		}
 		
 		public function get waiting() : Boolean
@@ -69,115 +64,46 @@ package com.ukuleledog.games.sonic.elements
 		public function set animation( name:String ) : void
 		{
 			
+			if ( _jumping )
+				name = 'jump';
+			
 			if ( name == _animation )
 				return;
-			
+				
 			switch( name )
 			{
 				case 'idle':
-					_frames = 1;
-					_offsetX = 5;
-					_offsetY = 8;
-					_height = 39;
-					_width = 30;
-					_framerate = 0;
-					_animationChangeTimer.delay = 6000;
-					_animationChangeTimer.addEventListener( TimerEvent.TIMER, animationChange );
-					_animationChangeTimer.start();
-					break;
-				case 'wait':
-					_frames = 2;
-					_offsetX = 37;
-					_offsetY = 8;
-					_height = 39;
-					_width = 30;
-					_framerate = 150;
-					break;
-				case 'down':
-					_frames = 1;
-					_offsetY = 21;
-					_offsetX = 157;
-					_height = 26;
-					_width = 30;
-					_framerate = 0;
-					break;
-				case 'jump':
-					_frames = 1;
-					_offsetY = 2;
-					_offsetX = 186;
-					_height = 45;
-					_width = 30;
-					_framerate = 0;
-					break;
+
 				case 'walk':
-					_frames = 6;
-					_offsetY = 50;
-					_offsetX = 6;
-					_height = 39;
-					_width = 34;
-					_framerate = 100;
+					_speed = _speedWalk;
+					_view.gotoAndStop(name);
 					_animationChangeTimer.delay = 1000;
 					_animationChangeTimer.addEventListener( TimerEvent.TIMER, animationChange );
 					_animationChangeTimer.start();
-					_speed = _speedWalk;
 					break;
 				case 'run':
-					_frames = 4;
-					_offsetY = 94;
-					_offsetX = 2;
-					_height = 35;
-					_width = 34;
-					_framerate = 100;
 					_speed = _speedRun;
+					_view.gotoAndStop(name);
 					break;
+				case 'wait':
+				case 'down':
+				case 'jump':
 				case 'push':
-					_frames = 1;
-					_offsetY = 263;
-					_offsetX = 8;
-					_height = 37;
-					_width = 25;
-					_framerate = 100;
+					_view.gotoAndStop(name);
+					break;
+				default:
+					_view.gotoAndStop('down');
 					break;
 			}
 			
-			_currentFrame = 0;
 			_animation = name;
-			_animationTimer.reset();
-			if ( _framerate != 0 )
-			{
-				_animationTimer.addEventListener(TimerEvent.TIMER, animate );
-				_animationTimer.delay = _framerate;
-				_animationTimer.start();
-			}
-			else
-			{
-				_animationTimer.removeEventListener( TimerEvent.TIMER, animate );
-				animate();
-			}
+			
 			
 		}
 		
 		private function animate( e:TimerEvent=null ) : void
 		{
-			this.graphics.clear();
-			var img:BitmapData = new BitmapData( _width, _height, true, 0x2C6A8A );
-			img.copyPixels( _spritesheet.bitmapData, new Rectangle( _offsetX + (_currentFrame * _width), _offsetY, _width, _height ), new Point(0, 0) );
-			
-			if ( _inverted )
-			{
-				var matrix:Matrix = new Matrix( -1, 0, 0, 1, img.width, 0);
-				var flipped:BitmapData = new BitmapData( img.width, img.height, img.transparent );
-				flipped.draw( img, matrix );
-				img = flipped;
-			}
-			
-			this.graphics.beginBitmapFill( img );
-			this.graphics.drawRect( 0, 0, _width, _height );
-			this.graphics.endFill();
-			
-			if ( ++_currentFrame == _frames )
-				_currentFrame = 0;
-
+			_view.nextFrame();
 		}
 		
 		private function animationChange( e:TimerEvent ) : void
@@ -198,26 +124,30 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function moveRight() : void
 		{
-			//if ( _onGround )
-			if ( true )
-			{
-				this.x += _speed;
-				if ( _animation != 'walk' && _animation != 'run' )
-				animation = 'walk';
+			this.x += _speed;
+			if ( _animation != 'walk' && _animation != 'run' )
+			animation = 'walk';
+			
+			if ( _inverted ) {
+				_inverted = false;
+				scaleX = 2;
+				scaleY = 2;
+				_view.x = 0;
 			}
-			_inverted = false;
 		}
 		
 		public function moveLeft() : void
 		{
-			//if ( _onGround )
-			if ( true )
-			{
-				this.x -= _speed;
-				if ( _animation != 'walk' && _animation != 'run' )
-				animation = 'walk';
+			this.x -= _speed;
+			if ( _animation != 'walk' && _animation != 'run' )
+			animation = 'walk';
+			
+			if ( !_inverted ) {
+				_inverted = true;
+				scaleX = -2;
+				scaleY = 2;
+				_view.x -= _view.width;
 			}
-			_inverted = true;
 		}
 		
 		public function jump() : void
@@ -239,6 +169,7 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function loop() : void
 		{
+						
 			if ( _jumping )
 			{
 				if ( y > _jumpToY )

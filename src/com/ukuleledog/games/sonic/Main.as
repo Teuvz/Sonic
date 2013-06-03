@@ -37,7 +37,6 @@ package com.ukuleledog.games.sonic
 		{		
 			checkForUpdate();	
 			
-			stage.frameRate = 3;
 			_currentState = new MenuState();
 			_currentState.addEventListener( MenuEvent.MENU_START, menuStartHandle );
 			addChild( _currentState );
@@ -60,7 +59,6 @@ package com.ukuleledog.games.sonic
 			removeChild( _currentState );
 			_currentState = null;
 			_currentState = new GameState();
-			stage.frameRate = 30;
 			addChild( _currentState );
 		}
 		
