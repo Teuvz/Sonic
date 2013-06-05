@@ -10,6 +10,7 @@ package com.ukuleledog.games.sonic.elements
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.media.Sound;
 	import flash.utils.Timer;
 	/**
 	 * ...
@@ -33,6 +34,8 @@ package com.ukuleledog.games.sonic.elements
 		private var _jumpToY:uint = 0;
 		
 		private var _animationChangeTimer:Timer = new Timer(1000);
+		
+		private var _jumpSound:Sound = new Ressources.SOUND_JUMP();
 		
 		public function Sonic() 
 		{
@@ -73,7 +76,12 @@ package com.ukuleledog.games.sonic.elements
 			switch( name )
 			{
 				case 'idle':
-
+					_speed = _speedWalk;
+					_view.gotoAndStop(name);
+					_animationChangeTimer.delay = 2000;
+					_animationChangeTimer.addEventListener( TimerEvent.TIMER, animationChange );
+					_animationChangeTimer.start();
+					break;
 				case 'walk':
 					_speed = _speedWalk;
 					_view.gotoAndStop(name);
@@ -146,7 +154,7 @@ package com.ukuleledog.games.sonic.elements
 				_inverted = true;
 				scaleX = -2;
 				scaleY = 2;
-				_view.x -= _view.width;
+				_view.x -= (_view.width - 7);
 			}
 		}
 		
@@ -158,6 +166,7 @@ package com.ukuleledog.games.sonic.elements
 				_onGround = false;
 				animation = 'jump';
 				_jumpToY = y - 100;
+				_jumpSound.play();
 			}
 		}
 		

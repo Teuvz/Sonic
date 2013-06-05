@@ -50,7 +50,7 @@ package com.ukuleledog.games.sonic.elements
 			floor.graphics.beginFill( 0x00AA00, 0.5);
 			floor.graphics.drawRect( 0, 0, stage.stageWidth*7, stage.stageHeight / 2 );
 			floor.graphics.endFill();
-			floor.y = 400;
+			floor.y = 415;
 			floor.name = "floor";
 			floor.visible = false;
 			addChild( floor );

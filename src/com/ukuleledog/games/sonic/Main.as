@@ -60,6 +60,11 @@ package com.ukuleledog.games.sonic
 			_currentState = null;
 			_currentState = new GameState();
 			addChild( _currentState );
+			
+			if ( CONFIG::debug ) {
+				removeChild( _stats );
+				addChild( _stats );
+			}
 		}
 		
 	}

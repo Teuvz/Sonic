@@ -22,6 +22,9 @@ package com.ukuleledog.games.sonic
 		[Embed (source = '../../../../../lib/assets/mp3/level.mp3')]
 		public static const MUSIC_LEVEL:Class;
 		
+		[Embed (source = '../../../../../lib/assets/mp3/jump.mp3')]
+		public static const SOUND_JUMP:Class;
+		
 		public function Ressources() 
 		{
 			

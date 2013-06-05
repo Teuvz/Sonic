@@ -40,11 +40,12 @@ package com.ukuleledog.games.sonic.states
 			addEventListener( Event.ENTER_FRAME, loop );
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
-			
+		
 		}
 		
 		private function levelRestart( e:LevelEvent = null ) : void
 		{
+			stopMusic();
 			var loadingScreen:Sprite = new Sprite();
 			loadingScreen.graphics.beginFill( 0x000000 );
 			loadingScreen.graphics.drawRect(0, 0, stage.stageWidth, stage.stageHeight );
@@ -73,6 +74,7 @@ package com.ukuleledog.games.sonic.states
 			
 			removeChild( loadingScreen );
 			addChild( _currentLevel );
+			startMusic( new Ressources.MUSIC_LEVEL(), true );
 		}
 		
 		private function loop( e:Event ) : void
