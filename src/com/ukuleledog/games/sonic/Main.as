@@ -37,7 +37,7 @@ package com.ukuleledog.games.sonic
 		{		
 			checkForUpdate();	
 			
-			_currentState = new MenuState();
+			_currentState = new GameState();
 			_currentState.addEventListener( MenuEvent.MENU_START, menuStartHandle );
 			addChild( _currentState );
 			

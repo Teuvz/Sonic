@@ -103,7 +103,7 @@ package com.ukuleledog.games.sonic.elements
 			
 			var i:uint = _colliderElements.length;
 			
-			while ( --i >= 0 )
+			while ( --i >= 0 && !_sonic.jumping )
 			{
 				if ( _colliderElements[i].x <= (_sonic.x + _sonic.width/2) && (_colliderElements[i].x + _colliderElements[i].width) >= (_sonic.x + _sonic.width/2 ) )
 				{
@@ -143,7 +143,7 @@ package com.ukuleledog.games.sonic.elements
 		public function moveLeft() : void
 		{
 			
-			var canMove:Boolean = true;
+			var canMove:Boolean = _running;
 			var i:uint = _colliderElements.length;
 			
 			while ( --i >= 0 )
@@ -170,7 +170,7 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function moveRight() : void
 		{
-			var canMove:Boolean = true;
+			var canMove:Boolean = _running;
 			var i:uint = _colliderElements.length;
 			
 			while ( --i >= 0 )

@@ -1,18 +1,12 @@
-package  
+package 
 {
-	
-	/**
-	 * ...
-	 * @author matt
-	 */
-	public final class Version 
-	{
-		
-		static public const Major:int = 1;
-		static public const Minor:int = 1;
-		static public const Build:int = 0;
-		static public const Revision:int = 0;
-		
-	}
-	
+  public final class Version
+  {
+      public static const Major:int = 1;
+      public static const Minor:int = 0;
+      public static const Build:int = 77;
+      public static const Revision:int = 0;
+      public static const Timestamp:String = "11/06/2013 22:27:30";
+      public static const Author:String = "matt";
+  }
 }

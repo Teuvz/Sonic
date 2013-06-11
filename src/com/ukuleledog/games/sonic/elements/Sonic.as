@@ -56,6 +56,11 @@ package com.ukuleledog.games.sonic.elements
 			return _animation == 'down';
 		}
 		
+		public function get jumping() : Boolean
+		{
+			return _jumping;
+		}
+		
 		public function set jumping( value:Boolean ) : void
 		{
 			if ( value == true )
@@ -203,6 +208,7 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function fall() : void
 		{
+			
 			if ( !_jumping )
 			{
 				this.y += _fallSpeed;				

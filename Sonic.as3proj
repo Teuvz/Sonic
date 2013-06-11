@@ -9,9 +9,9 @@
     <movie width="800" />
     <movie height="600" />
     <movie version="3" />
-    <movie minorVersion="5" />
+    <movie minorVersion="7" />
     <movie platform="AIR" />
-    <movie background="#000000" />
+    <movie background="#FFFFFF" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -20,6 +20,7 @@
   <!-- Build options -->
   <build>
     <option accessible="False" />
+    <option advancedTelemetry="False" />
     <option allowSourcePathOverlap="False" />
     <option benchmark="False" />
     <option es="False" />
@@ -50,9 +51,9 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="lib\Stats.swc" />
-    <element path="lib\sonic.swc" />
     <element path="lib\assets.swc" />
+    <element path="lib\sonic.swc" />
+    <element path="lib\Stats.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

@@ -79,7 +79,7 @@ package com.ukuleledog.games.sonic.states
 		
 		private function loop( e:Event ) : void
 		{
-	
+			
 			keyPressed = false;
 			
 			if ( pressedKeys[Keyboard.DOWN] == true ) {
@@ -93,7 +93,7 @@ package com.ukuleledog.games.sonic.states
 				keyPressed = true;
 			}
 			
-			if ( pressedKeys[Keyboard.SPACE] == true && !_currentLevel.sonic.crouching) {
+			if ( pressedKeys[Keyboard.SPACE] == true && !_currentLevel.sonic.crouching && !_currentLevel.sonic.jumping ) {
 				_currentLevel.jump();
 				keyPressed = true;
 			}
