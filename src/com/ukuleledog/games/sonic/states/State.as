@@ -22,6 +22,9 @@ package com.ukuleledog.games.sonic.states
 		
 		protected function startMusic( sound:Sound, loop:Boolean = false ) : void
 		{
+			if (CONFIG::sound != true)
+				return;
+			
 			if ( loop ) 
 				_music = sound.play(0,9999);
 			else

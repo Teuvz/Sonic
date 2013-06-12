@@ -171,7 +171,9 @@ package com.ukuleledog.games.sonic.elements
 				_onGround = false;
 				animation = 'jump';
 				_jumpToY = y - 100;
-				_jumpSound.play();
+				
+				if (CONFIG::sound == true)
+					_jumpSound.play();
 			}
 		}
 		

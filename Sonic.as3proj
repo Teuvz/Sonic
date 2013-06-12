@@ -9,9 +9,9 @@
     <movie width="800" />
     <movie height="600" />
     <movie version="3" />
-    <movie minorVersion="7" />
+    <movie minorVersion="5" />
     <movie platform="AIR" />
-    <movie background="#FFFFFF" />
+    <movie background="#000000" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -20,7 +20,6 @@
   <!-- Build options -->
   <build>
     <option accessible="False" />
-    <option advancedTelemetry="False" />
     <option allowSourcePathOverlap="False" />
     <option benchmark="False" />
     <option es="False" />
@@ -42,7 +41,7 @@
     <option loadExterns="" />
     <option staticLinkRSL="True" />
     <option additional="+configname=air" />
-    <option compilerConstants="" />
+    <option compilerConstants="CONFIG::sound,false&#xA;CONFIG::fullscreen,false" />
     <option minorVersion="" />
   </build>
   <!-- SWC Include Libraries -->

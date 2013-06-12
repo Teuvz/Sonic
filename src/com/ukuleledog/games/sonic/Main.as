@@ -11,6 +11,8 @@ package com.ukuleledog.games.sonic
 	import com.ukuleledog.games.sonic.states.MenuState;
 	import com.ukuleledog.games.sonic.states.State;
 	import flash.display.Sprite;
+	import flash.display.StageDisplayState;
+	import flash.display.StageScaleMode;
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -37,13 +39,18 @@ package com.ukuleledog.games.sonic
 		{		
 			checkForUpdate();	
 			
-			_currentState = new GameState();
+			_currentState = new MenuState();
 			_currentState.addEventListener( MenuEvent.MENU_START, menuStartHandle );
 			addChild( _currentState );
 			
 			if ( CONFIG::debug ) {
 				_stats = new Stats();
 				addChild( _stats );
+			}
+			
+			if ( CONFIG::fullscreen ) {
+				stage.scaleMode = StageScaleMode.EXACT_FIT;
+				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 			}
 		}
 		

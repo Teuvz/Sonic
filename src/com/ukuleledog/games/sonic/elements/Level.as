@@ -75,7 +75,8 @@ package com.ukuleledog.games.sonic.elements
 			_colliderElements.push(wall2);
 			
 			_sonic = new Sonic();
-			_sonic.x = (stage.stageWidth / 2) - (_sonic.width / 2);
+			_sonic.x = stage.stageWidth * 2.5;
+			_sonic.y = 337;
 			addChild( _sonic );
 			
 			_running = true;
