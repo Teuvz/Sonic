@@ -1,6 +1,8 @@
 package com.ukuleledog.games.sonic.elements 
 {
 	import com.ukuleledog.games.sonic.blocks.Block;
+	import com.ukuleledog.games.sonic.blocks.Block1;
+	import com.ukuleledog.games.sonic.blocks.Block2;
 	import com.ukuleledog.games.sonic.events.LevelEvent;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -26,31 +28,20 @@ package com.ukuleledog.games.sonic.elements
 			this.removeEventListener(Event.ADDED_TO_STAGE, init );
 		
 			_blocks = new Vector.<Block>();
-			var block1:Block = new Block( 1, 'lala' );
+			var block1:Block1 = new Block1( 1 );
 			addChild(block1);
 			_blocks.push(block1);
 			
-			var block2:Block = new Block( 2, 'lala' );
+			var block2:Block1 = new Block1( 2 );
 			block2.x = stage.stageWidth;
 			addChild(block2);
 			_blocks.push(block2);
 			
-			var block3:Block = new Block( 3, 'lala' );
+			var block3:Block1 = new Block1( 3 );
 			block3.x = stage.stageWidth * 2;
 			addChild(block3);
 			_blocks.push(block3);
-						
-			/*_colliderElements = new Vector.<Element>();
-			var floor:Element = new Element();
-			floor.graphics.beginFill( 0x00AA00, 0.5);
-			floor.graphics.drawRect( 0, 0, stage.stageWidth*3, stage.stageHeight / 2 );
-			floor.graphics.endFill();
-			floor.y = 415;
-			floor.name = "floor";
-			floor.visible = false;
-			addChild( floor );
-			_colliderElements.push(floor);*/
-						
+	
 			_sonic = new Sonic();
 			_sonic.x = this.width / 2 - _sonic.width / 2;
 			_sonic.y = 337;
@@ -110,7 +101,7 @@ package com.ukuleledog.games.sonic.elements
 			
 			if ( _sonic.x < (minX + stage.stageWidth * 2) )
 			{
-				var blockX:Block = new Block( _blocks.length + 1, 'lala' );
+				var blockX:Block = Block.generateRandomBlock( _blocks.length + 1 );
 				blockX.x = minX - stage.stageWidth;
 				addChild(blockX);
 				_blocks.push(blockX);
@@ -118,7 +109,7 @@ package com.ukuleledog.games.sonic.elements
 			}
 			else if ( _sonic.x > maxX - stage.stageWidth )
 			{
-				var blockX2:Block = new Block( _blocks.length + 1, 'lala' );
+				var blockX2:Block = Block.generateRandomBlock( _blocks.length + 1 );
 				blockX2.x = maxX;
 				addChild(blockX2);
 				_blocks.push(blockX2);
@@ -178,8 +169,8 @@ package com.ukuleledog.games.sonic.elements
 			while ( --i >= 0 )
 			{
 				if ( 
-					_sonic.x < ( _colliderElements[i].x + _colliderElements[i].width ) &&
-					_colliderElements[i].x < _sonic.x && 
+					_sonic.x < ( _colliderElements[i].absoluteX + _colliderElements[i].width ) &&
+					_colliderElements[i].absoluteX < _sonic.x && 
 					_colliderElements[i].y < _sonic.y && 
 					(_colliderElements[i].y + _colliderElements[i].height) > (_sonic.y + _sonic.height )
 				)
@@ -187,7 +178,7 @@ package com.ukuleledog.games.sonic.elements
 					_sonic.animation = "push";
 					canMove = false;
 					_sonic.jumping = false;
-					_sonic.x = (_colliderElements[i].x + _colliderElements[i].width ) - 1;
+					_sonic.x = (_colliderElements[i].absoluteX + _colliderElements[i].width ) - 1;
 					break;
 				}
 			}
@@ -205,8 +196,8 @@ package com.ukuleledog.games.sonic.elements
 			while ( --i >= 0 )
 			{
 				if ( 
-					_colliderElements[i].x < ( _sonic.x + _sonic.width ) &&
-					_colliderElements[i].x > _sonic.x && 
+					_colliderElements[i].absoluteX < ( _sonic.x + _sonic.width ) &&
+					_colliderElements[i].absoluteX > _sonic.x && 
 					_colliderElements[i].y < _sonic.y && 
 					(_colliderElements[i].y + _colliderElements[i].height) > (_sonic.y + _sonic.height )
 				)
@@ -214,7 +205,7 @@ package com.ukuleledog.games.sonic.elements
 					_sonic.animation = "push";
 					canMove = false;
 					_sonic.jumping = false;
-					_sonic.x = (_colliderElements[i].x - _sonic.width ) + 1;
+					_sonic.x = (_colliderElements[i].absoluteX - _sonic.width ) + 1;
 					break;
 				}
 			}

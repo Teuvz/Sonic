@@ -16,45 +16,17 @@ package com.ukuleledog.games.sonic.blocks
 	 */
 	public class Block extends Sprite 
 	{
-		
+				
 		protected var _id:uint;
-		private var _ocean:MovieClip = new asset_ocean();
-		private var _backdrop:MovieClip = new asset_backdrop();
-		private var _ground:Sprite = new asset_ground();
-		
-		private var _colliderElements:Vector.<Element>;
+		protected var _colliderElements:Vector.<Element>;
+		protected var _ocean:MovieClip = new asset_ocean();
+		protected var _backdrop:MovieClip = new asset_backdrop();
+		protected var _ground:Sprite = new asset_ground();
 		
 		public function Block( id:uint, type:String ) 
 		{
 			super();
 			this._id = id;
-			addEventListener(Event.ADDED_TO_STAGE, init);
-		}
-		
-		private function init( e:Event ) : void
-		{
-			removeEventListener(Event.ADDED_TO_STAGE, init);
-			
-			_ocean.width = stage.stageWidth;
-			_ocean.height = 415;
-			addChild( _ocean );
-						
-			_ground.width = stage.stageWidth;
-			_ground.scaleY = _ground.scaleX;
-			_ground.y = 400;
-			addChild( _ground );
-						
-			_colliderElements = new Vector.<Element>();
-			var floor:Element = new Element();
-			floor.graphics.beginFill( 0x00AA00, 0.3);
-			floor.graphics.drawRect( 0, 0, this.width, 50 );
-			floor.graphics.endFill();
-			floor.y = 415;
-			floor.visible = true;
-			floor.absoluteX = this.x;
-			addChild( floor );
-			_colliderElements.push(floor);
-						
 		}
 				
 		public function get id() : uint
@@ -65,6 +37,16 @@ package com.ukuleledog.games.sonic.blocks
 		public function get colliderElements() : Vector.<Element>
 		{
 			return _colliderElements;
+		}
+		
+		public static function generateRandomBlock(id:uint) : Block
+		{
+			if ( Math.round(Math.random()) == 0 )
+			{
+				return new Block2(id);
+			} else {
+				return new Block1(id);
+			}
 		}
 		
 	}
