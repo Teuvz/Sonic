@@ -22,7 +22,7 @@ package com.ukuleledog.games.sonic.states
 		
 		protected function startMusic( sound:Sound, loop:Boolean = false ) : void
 		{
-			if (CONFIG::sound != true)
+			if (CONFIG::sound != true || CONFIG::debug)
 				return;
 			
 			if ( loop ) 

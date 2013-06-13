@@ -48,7 +48,7 @@ package com.ukuleledog.games.sonic
 				addChild( _stats );
 			}
 			
-			if ( CONFIG::fullscreen ) {
+			if ( CONFIG::fullscreen && !CONFIG::debug ) {
 				stage.scaleMode = StageScaleMode.EXACT_FIT;
 				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
 			}

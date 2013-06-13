@@ -27,6 +27,7 @@ package com.ukuleledog.games.sonic.elements
 		private var _animation:String;
 		private var _speed:uint = 20;
 		private var _fallSpeed:uint = 10;
+		private var _fallSpeedMin:uint = 10;
 		private var _fallSpeedMax:uint = 30;
 		private var _inverted:Boolean = false;
 		private var _onGround:Boolean = false;
@@ -172,7 +173,7 @@ package com.ukuleledog.games.sonic.elements
 				animation = 'jump';
 				_jumpToY = y - 100;
 				
-				if (CONFIG::sound == true)
+				if (CONFIG::sound == true && !CONFIG::debug)
 					_jumpSound.play();
 			}
 		}
@@ -213,7 +214,8 @@ package com.ukuleledog.games.sonic.elements
 			
 			if ( !_jumping )
 			{
-				this.y += _fallSpeed;				
+				this.y += _fallSpeed;
+				_fallSpeed++;
 			}
 			
 		}

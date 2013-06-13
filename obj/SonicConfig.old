@@ -32,11 +32,11 @@
     </define>
     <define append="true">
       <name>CONFIG::sound</name>
-      <value>false</value>
+      <value>true</value>
     </define>
     <define append="true">
       <name>CONFIG::fullscreen</name>
-      <value>false</value>
+      <value>true</value>
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">

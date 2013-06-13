@@ -8,6 +8,9 @@ package com.ukuleledog.games.sonic.elements
 	public class Element extends Sprite
 	{
 		
+		public var absoluteX:int;
+		public var absoluteY:int;
+		
 		public function Element() 
 		{
 			
