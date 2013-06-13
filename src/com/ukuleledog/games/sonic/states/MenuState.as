@@ -24,6 +24,7 @@ package com.ukuleledog.games.sonic.states
 		
 		private var _sonic:MovieClip = new asset_title();
 		private var _sonicFrame:uint = 0;
+		private var _startMessage:MovieClip = new asset_startmessage();
 		
 		public function MenuState() 
 		{
@@ -64,6 +65,12 @@ package com.ukuleledog.games.sonic.states
 			_sonic.scaleX = 1.5;
 			_sonic.scaleY = 1.5;
 			addChild( _sonic );
+			
+			_startMessage.scaleX = 2;
+			_startMessage.scaleY = 2;
+			_startMessage.x = stage.stageWidth / 2 - _startMessage.width / 2;
+			_startMessage.y = 450;
+			addChild( _startMessage );
 			
 			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
 			
