@@ -8,6 +8,7 @@ package com.ukuleledog.games.sonic.states
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.media.Sound;
@@ -72,7 +73,11 @@ package com.ukuleledog.games.sonic.states
 			_startMessage.y = 450;
 			addChild( _startMessage );
 			
-			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
+			if ( CONFIG::mobile == true ) {
+				stage.addEventListener( MouseEvent.CLICK, onMouseClick );
+			} else {
+				stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
+			}
 			
 			startMusic( new Ressources.MUSIC_MENU() );
 		}
@@ -84,6 +89,13 @@ package com.ukuleledog.games.sonic.states
 				stopMusic();
 				dispatchEvent( new MenuEvent( MenuEvent.MENU_START ) );
 			}
+		}
+		
+		private function onMouseClick( e:MouseEvent ) : void
+		{
+			stage.removeEventListener( MouseEvent.CLICK, onMouseClick );
+			stopMusic();
+			dispatchEvent( new MenuEvent( MenuEvent.MENU_START ) );
 		}
 		
 	}

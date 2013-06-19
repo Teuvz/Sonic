@@ -19,7 +19,9 @@ package com.ukuleledog.games.sonic
 	import flash.filesystem.File;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	import flash.ui.GameInput;
 	import flash.ui.Keyboard;
+	import flash.ui.Mouse;
 	import flash.utils.Dictionary;
 	import net.hires.debug.Stats;
 	
@@ -37,13 +39,16 @@ package com.ukuleledog.games.sonic
 		
 		public function Main():void 
 		{		
-			checkForUpdate();	
+			
+			Mouse.hide();
+			
+			checkForUpdate();
 			
 			_currentState = new MenuState();
 			_currentState.addEventListener( MenuEvent.MENU_START, menuStartHandle );
 			addChild( _currentState );
 			
-			if ( CONFIG::debug ) {
+			if ( CONFIG::debug && CONFIG::stats ) {
 				_stats = new Stats();
 				addChild( _stats );
 			}
@@ -59,7 +64,7 @@ package com.ukuleledog.games.sonic
 			appUpdater.configurationFile = new File("app:/updateConfig.xml"); 
 			appUpdater.initialize();
 		}
-		
+
 		private function menuStartHandle( e:MenuEvent ) : void
 		{
 			_currentState.removeEventListener( MenuEvent.MENU_START, menuStartHandle );
@@ -68,7 +73,7 @@ package com.ukuleledog.games.sonic
 			_currentState = new GameState();
 			addChild( _currentState );
 			
-			if ( CONFIG::debug ) {
+			if ( CONFIG::debug && CONFIG::stats ) {
 				removeChild( _stats );
 				addChild( _stats );
 			}

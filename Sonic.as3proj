@@ -9,9 +9,10 @@
     <movie width="800" />
     <movie height="600" />
     <movie version="3" />
-    <movie minorVersion="5" />
+    <movie minorVersion="7" />
     <movie platform="AIR" />
     <movie background="#000000" />
+    <movie preferredSDK="Flex 4.6.0, AIR 3.7;4.6.0, 3.7;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
@@ -20,6 +21,7 @@
   <!-- Build options -->
   <build>
     <option accessible="False" />
+    <option advancedTelemetry="False" />
     <option allowSourcePathOverlap="False" />
     <option benchmark="False" />
     <option es="False" />
@@ -41,7 +43,7 @@
     <option loadExterns="" />
     <option staticLinkRSL="True" />
     <option additional="+configname=air" />
-    <option compilerConstants="CONFIG::sound,true&#xA;CONFIG::fullscreen,true" />
+    <option compilerConstants="CONFIG::sound,true&#xA;CONFIG::fullscreen,true&#xA;CONFIG::mobile,false&#xA;CONFIG::stats,true" />
     <option minorVersion="" />
   </build>
   <!-- SWC Include Libraries -->

@@ -7,15 +7,9 @@ package com.ukuleledog.games.sonic
 	public class Ressources 
 	{
 		
-		//[Embed (source="../../../../../lib/assets/img/sonic.png" )]
-    	//public static const SONIC:Class;
-		
 		[Embed (source="../../../../../lib/assets/img/menu.png" )]
     	public static const START_MENU:Class;
-		
-		[Embed (source="../../../../../lib/assets/img/level.png" )]
-    	public static const LEVEL:Class;
-		
+			
 		[Embed (source = '../../../../../lib/assets/mp3/menu.mp3')]
 		public static const MUSIC_MENU:Class;
 		
@@ -24,6 +18,9 @@ package com.ukuleledog.games.sonic
 		
 		[Embed (source = '../../../../../lib/assets/mp3/jump.mp3')]
 		public static const SOUND_JUMP:Class;
+		
+		[Embed (source = '../../../../../lib/assets/mp3/ring.mp3')]
+		public static const SOUND_RING:Class;
 		
 		public function Ressources() 
 		{

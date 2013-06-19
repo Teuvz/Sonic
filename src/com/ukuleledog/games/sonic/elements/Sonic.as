@@ -166,6 +166,9 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function jump() : void
 		{
+			
+			trace( 'yeah? '+_onGround+', '+_jumping );
+			
 			if ( _onGround == true && _jumping == false )
 			{
 				_jumping = true;

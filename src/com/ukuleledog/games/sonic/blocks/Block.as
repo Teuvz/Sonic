@@ -19,9 +19,10 @@ package com.ukuleledog.games.sonic.blocks
 				
 		protected var _id:uint;
 		protected var _colliderElements:Vector.<Element>;
+		protected var _collectableElements:Vector.<Element>;
 		protected var _ocean:MovieClip = new asset_ocean();
 		protected var _backdrop:MovieClip = new asset_backdrop();
-		protected var _ground:Sprite = new asset_ground();
+		protected var _ground:MovieClip = new asset_ground();
 		
 		public function Block( id:uint, type:String ) 
 		{
@@ -39,14 +40,31 @@ package com.ukuleledog.games.sonic.blocks
 			return _colliderElements;
 		}
 		
+		public function get collectableElements() : Vector.<Element>
+		{
+			return _collectableElements;
+		}
+		
 		public static function generateRandomBlock(id:uint) : Block
 		{
-			if ( Math.round(Math.random()) == 0 )
-			{
-				return new Block2(id);
-			} else {
-				return new Block1(id);
+			
+			switch( Math.ceil( Math.random() * 4 ) ) {
+				case 1:
+					return new Block1(id)
+					break;
+				case 2:
+					return new Block2(id)
+					break;
+				case 3:
+					return new Block3(id)
+					break;
+				case 4:
+					return new Block4(id)
+					break;
 			}
+			
+			return new Block1(id);
+			
 		}
 		
 	}

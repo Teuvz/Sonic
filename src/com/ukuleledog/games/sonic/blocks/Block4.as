@@ -14,11 +14,11 @@ package com.ukuleledog.games.sonic.blocks
 	 * ...
 	 * @author matt
 	 */
-	public class Block2 extends Block 
+	public class Block4 extends Block 
 	{
 
 		
-		public function Block2( id:uint ) 
+		public function Block4( id:uint ) 
 		{
 			super(id, "lala");
 			addEventListener(Event.ADDED_TO_STAGE, init);
@@ -35,11 +35,15 @@ package com.ukuleledog.games.sonic.blocks
 			_ground.width = stage.stageWidth;
 			_ground.scaleY = _ground.scaleX;
 			_ground.y = 400;
+			
+			if ( Math.round( Math.random() ) == 0 )
+			_ground.gotoAndStop('bridge');
+			
 			addChild( _ground );
 						
 			_colliderElements = new Vector.<Element>();
 			var floor:Element = new Element();
-			floor.graphics.beginFill( 0x00FF00, 0.3);
+			floor.graphics.beginFill( 0x00AA00, 0.3);
 			floor.graphics.drawRect( 0, 0, this.width, 50 );
 			floor.graphics.endFill();
 			floor.y = 415;
@@ -48,22 +52,11 @@ package com.ukuleledog.games.sonic.blocks
 			addChild( floor );
 			_colliderElements.push(floor);
 			
-			var wall:Element = new Element();
-			wall.graphics.drawRect( 0, 0, 64, 136 );
-			wall.absoluteX = this.x + 300;
-			wall.x = 300;
-			wall.y = 320;
-			wall.addChild( new asset_block() );
-			wall.scaleX = 3;
-			wall.scaleY = 3;
-			addChild( wall );
-			_colliderElements.push(wall);
-			
 			_collectableElements = new Vector.<Element>();
 			var ring:Element = new Element();
 			ring.addChild( new asset_ring() );
-			ring.x = this.width / 2 + 10;
-			ring.y = 215;
+			ring.x = this.width / 2;
+			ring.y = floor.y - 75;
 			ring.scaleX = 3;
 			ring.scaleY = 3;
 			addChild( ring );
@@ -71,14 +64,41 @@ package com.ukuleledog.games.sonic.blocks
 			var ring2:Element = new Element();
 			ring2.addChild( new asset_ring() );
 			ring2.x = ring.x - ring.width - 10;
-			ring2.y = 215;
+			ring2.y = ring.y;
 			ring2.scaleX = 3;
 			ring2.scaleY = 3;
 			addChild( ring2 );
 			
+			var ring3:Element = new Element();
+			ring3.addChild( new asset_ring() );
+			ring3.x = ring.x + ring.width + 10;
+			ring3.y = ring.y;
+			ring3.scaleX = 3;
+			ring3.scaleY = 3;
+			addChild( ring3 );
+			
+			var ring4:Element = new Element();
+			ring4.addChild( new asset_ring() );
+			ring4.x = ring.x - ring.width*2 - 20;
+			ring4.y = ring.y;
+			ring4.scaleX = 3;
+			ring4.scaleY = 3;
+			addChild( ring4 );
+			
+			var ring5:Element = new Element();
+			ring5.addChild( new asset_ring() );
+			ring5.x = ring.x + ring.width*2 + 20;
+			ring5.y = ring.y;
+			ring5.scaleX = 3;
+			ring5.scaleY = 3;
+			addChild( ring5 );
+						
 			_collectableElements.push( ring );
 			_collectableElements.push( ring2 );
-						
+			_collectableElements.push( ring3 );
+			_collectableElements.push( ring4 );
+			_collectableElements.push( ring5 );
+			
 		}
 		
 	}

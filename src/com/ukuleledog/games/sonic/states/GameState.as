@@ -2,7 +2,9 @@ package com.ukuleledog.games.sonic.states
 {
 	import com.ukuleledog.games.sonic.elements.Level;
 	import com.ukuleledog.games.sonic.events.LevelEvent;
+	import com.ukuleledog.games.sonic.events.UIEvent;
 	import com.ukuleledog.games.sonic.Ressources;
+	import com.ukuleledog.games.sonic.ui.MobileUI;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
@@ -11,7 +13,6 @@ package com.ukuleledog.games.sonic.states
 	import flash.text.TextFormat;
 	import flash.ui.Keyboard;
 	import flash.utils.Dictionary;
-	import air.update.ApplicationUpdaterUI;
 	
 	/**
 	 * ...
@@ -19,7 +20,7 @@ package com.ukuleledog.games.sonic.states
 	 */
 	public class GameState extends State
 	{
-		
+		private var mobileUI:MobileUI;
 		private var keyPressed:Boolean = false;
 		private var pressedKeys:Dictionary = new Dictionary();
 		
@@ -38,8 +39,16 @@ package com.ukuleledog.games.sonic.states
 			levelRestart();
 			
 			addEventListener( Event.ENTER_FRAME, loop );
-			stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
-			stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+			
+			if ( CONFIG::mobile == true ) {
+				mobileUI = new MobileUI();
+				parent.addChild( mobileUI );
+				mobileUI.addEventListener( UIEvent.BUTTON_DOWN, onButtonDown );
+				mobileUI.addEventListener( UIEvent.BUTTON_UP, onButtonUp );
+			} else {
+				stage.addEventListener( KeyboardEvent.KEY_DOWN, onKeyDown );
+				stage.addEventListener( KeyboardEvent.KEY_UP, onKeyUp );
+			}
 		
 		}
 		
@@ -113,6 +122,16 @@ package com.ukuleledog.games.sonic.states
 		private function onKeyDown( e:KeyboardEvent )  : void
 		{
 			pressedKeys[e.keyCode] = true;
+		}
+		
+		private function onButtonUp( e:UIEvent ) : void
+		{
+			pressedKeys[e.button] = false;
+		}
+		
+		private function onButtonDown( e:UIEvent ) : void
+		{
+			pressedKeys[e.button] = true;
 		}
 		
 	}

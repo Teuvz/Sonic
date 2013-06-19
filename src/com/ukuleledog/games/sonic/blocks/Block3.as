@@ -14,11 +14,11 @@ package com.ukuleledog.games.sonic.blocks
 	 * ...
 	 * @author matt
 	 */
-	public class Block1 extends Block 
+	public class Block3 extends Block 
 	{
 
 		
-		public function Block1( id:uint ) 
+		public function Block3( id:uint ) 
 		{
 			super(id, "lala");
 			addEventListener(Event.ADDED_TO_STAGE, init);
@@ -51,7 +51,36 @@ package com.ukuleledog.games.sonic.blocks
 			floor.absoluteX = this.x;
 			addChild( floor );
 			_colliderElements.push(floor);
+			
+			_collectableElements = new Vector.<Element>();
+			var ring:Element = new Element();
+			ring.addChild( new asset_ring() );
+			ring.x = this.width / 2;
+			ring.y = 215;
+			ring.scaleX = 3;
+			ring.scaleY = 3;
+			addChild( ring );
+			
+			var ring2:Element = new Element();
+			ring2.addChild( new asset_ring() );
+			ring2.x = ring.x - ring.width - 10;
+			ring2.y = 215;
+			ring2.scaleX = 3;
+			ring2.scaleY = 3;
+			addChild( ring2 );
+			
+			var ring3:Element = new Element();
+			ring3.addChild( new asset_ring() );
+			ring3.x = ring.x + ring.width + 10;
+			ring3.y = 215;
+			ring3.scaleX = 3;
+			ring3.scaleY = 3;
+			addChild( ring3 );
 						
+			_collectableElements.push( ring );
+			_collectableElements.push( ring2 );
+			_collectableElements.push( ring3 );
+			
 		}
 		
 	}

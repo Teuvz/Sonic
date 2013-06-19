@@ -4,8 +4,11 @@ package com.ukuleledog.games.sonic.elements
 	import com.ukuleledog.games.sonic.blocks.Block1;
 	import com.ukuleledog.games.sonic.blocks.Block2;
 	import com.ukuleledog.games.sonic.events.LevelEvent;
+	import com.ukuleledog.games.sonic.Ressources;
+	import com.ukuleledog.games.sonic.ui.Hud;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.media.Sound;
 	/**
 	 * ...
 	 * @author matt
@@ -17,6 +20,7 @@ package com.ukuleledog.games.sonic.elements
 		private var _colliderElements:Vector.<Element>;
 		private var _running:Boolean = false;
 		private var _blocks:Vector.<Block>;
+		private var _hud:Hud;	
 		
 		public function Level() 
 		{
@@ -47,6 +51,9 @@ package com.ukuleledog.games.sonic.elements
 			_sonic.y = 337;
 			addChild( _sonic );
 			
+			_hud = new Hud();
+			parent.addChild( _hud );
+			
 			_running = true;
 		}
 		
@@ -57,6 +64,9 @@ package com.ukuleledog.games.sonic.elements
 			{
 				manageBlocks();
 				_colliderElements = getCurrentBlock().colliderElements;
+				
+				if ( getCurrentBlock().collectableElements != null )
+					collect();
 				
 				collideVertical();
 				moveCamera();
@@ -118,6 +128,30 @@ package com.ukuleledog.games.sonic.elements
 			
 		}
 		
+		private function collect() : void
+		{
+			
+			var i:uint = getCurrentBlock().collectableElements.length;
+			
+			while ( --i >= 0 ) {
+				
+				if ( getCurrentBlock().collectableElements[i].hitTestObject( _sonic ) ) {
+					getCurrentBlock().removeChild( getCurrentBlock().collectableElements[i] );
+					getCurrentBlock().collectableElements[i] = null;
+					getCurrentBlock().collectableElements.splice( i, 1 );
+					
+					_hud.addPoint();
+					
+					if ( CONFIG::sound && !CONFIG::debug ) {
+						var sound:Sound = new Ressources.SOUND_RING();
+						sound.play();
+					}
+				}
+				
+			}
+			
+		}
+		
 		private function collideVertical() : void
 		{
 			
@@ -131,7 +165,7 @@ package com.ukuleledog.games.sonic.elements
 					if ( (_sonic.y + _sonic.height) < _colliderElements[i].y )
 					{
 						_sonic.fall();
-						_sonic.onGround = false;
+						//_sonic.onGround = false;
 					} 
 					else if ( (_sonic.y + _sonic.height) > _colliderElements[i].y )
 					{
