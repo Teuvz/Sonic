@@ -73,7 +73,7 @@ package com.ukuleledog.games.sonic.elements
 		public function set animation( name:String ) : void
 		{
 			
-			if ( _jumping )
+			if ( _jumping && name != 'jumpball' )
 				name = 'jump';
 			
 			if ( name == _animation )
@@ -102,6 +102,7 @@ package com.ukuleledog.games.sonic.elements
 				case 'wait':
 				case 'down':
 				case 'jump':
+				case 'jumpball':
 				case 'push':
 					_view.gotoAndStop(name);
 					break;
@@ -139,7 +140,12 @@ package com.ukuleledog.games.sonic.elements
 		public function moveRight() : void
 		{
 			this.x += _speed;
-			if ( _animation != 'walk' && _animation != 'run' )
+			
+			if ( _jumping )
+			animation = 'jumpball';
+			else if ( _speed == _speedRun )
+			animation = 'run';
+			else if ( _animation != 'walk' && _animation != 'run' )			
 			animation = 'walk';
 			
 			if ( _inverted ) {
@@ -153,7 +159,12 @@ package com.ukuleledog.games.sonic.elements
 		public function moveLeft() : void
 		{
 			this.x -= _speed;
-			if ( _animation != 'walk' && _animation != 'run' )
+			
+			if ( _jumping )
+			animation = 'jumpball';
+			else if ( _speed == _speedRun )
+			animation = 'run';
+			else if ( _animation != 'walk' && _animation != 'run' )
 			animation = 'walk';
 			
 			if ( !_inverted ) {
@@ -166,9 +177,7 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function jump() : void
 		{
-			
-			trace( 'yeah? '+_onGround+', '+_jumping );
-			
+						
 			if ( _onGround == true && _jumping == false )
 			{
 				_jumping = true;

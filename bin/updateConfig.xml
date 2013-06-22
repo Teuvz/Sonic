@@ -3,7 +3,7 @@
      <url>http://www.matthewpcharlton.com/games/sonic/pc/update.xml</url> 
     <delay>0.01</delay> 
 	<defaultUI> 
-         <dialog name="checkForUpdate" visible="true" /> 
+         <dialog name="checkForUpdate" visible="false" /> 
          <dialog name="downloadUpdate" visible="true" /> 
          <dialog name="downloadProgress" visible="true" /> 
       </defaultUI> 
