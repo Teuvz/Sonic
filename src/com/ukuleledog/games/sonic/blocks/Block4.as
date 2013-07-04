@@ -98,7 +98,7 @@ package com.ukuleledog.games.sonic.blocks
 			_collectableElements.push( ring3 );
 			_collectableElements.push( ring4 );
 			_collectableElements.push( ring5 );
-			
+						
 		}
 		
 	}

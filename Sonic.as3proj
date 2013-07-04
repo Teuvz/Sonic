@@ -43,7 +43,7 @@
     <option loadExterns="" />
     <option staticLinkRSL="True" />
     <option additional="+configname=air" />
-    <option compilerConstants="CONFIG::sound,true&#xA;CONFIG::fullscreen,true&#xA;CONFIG::mobile,false&#xA;CONFIG::stats,true" />
+    <option compilerConstants="CONFIG::sound,true&#xA;CONFIG::fullscreen,true&#xA;CONFIG::mobile,false&#xA;CONFIG::stats,true&#xA;CONFIG::shapes,false" />
     <option minorVersion="" />
   </build>
   <!-- SWC Include Libraries -->

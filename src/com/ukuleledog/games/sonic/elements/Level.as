@@ -258,6 +258,11 @@ package com.ukuleledog.games.sonic.elements
 			_sonic.crouch();
 		}
 		
+		public function addSign() : void
+		{
+			//addChild( new asset_sign() );
+		}
+		
 	}
 
 }

@@ -49,6 +49,11 @@ package com.ukuleledog.games.sonic.blocks
 			_colliderElements.push(floor);
 			
 			var wall:Element = new Element();
+			
+			if ( CONFIG::shapes ) {
+				wall.graphics.lineStyle( 1, 0x00FF00 );
+			}
+			
 			wall.graphics.drawRect( 0, 0, 64, 136 );
 			wall.absoluteX = this.x + 300;
 			wall.x = 300;
@@ -78,7 +83,7 @@ package com.ukuleledog.games.sonic.blocks
 			
 			_collectableElements.push( ring );
 			_collectableElements.push( ring2 );
-						
+									
 		}
 		
 	}

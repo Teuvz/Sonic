@@ -40,8 +40,6 @@ package com.ukuleledog.games.sonic
 		public function Main():void 
 		{		
 			
-			Mouse.hide();
-			
 			checkForUpdate();
 			
 			_currentState = new MenuState();
@@ -52,17 +50,20 @@ package com.ukuleledog.games.sonic
 				_stats = new Stats();
 				addChild( _stats );
 			}
+					
+			stage.scaleMode = StageScaleMode.EXACT_FIT;
 			
-			if ( CONFIG::fullscreen && !CONFIG::debug ) {
-				stage.scaleMode = StageScaleMode.EXACT_FIT;
-				stage.displayState = StageDisplayState.FULL_SCREEN_INTERACTIVE;
-			}
 		}
 		
 		private function checkForUpdate() : void
 		{
 			appUpdater.configurationFile = new File("app:/updateConfig.xml"); 
 			appUpdater.initialize();
+		}
+		
+		private function lala( e:UpdateEvent ) : void
+		{
+			trace( e );
 		}
 
 		private function menuStartHandle( e:MenuEvent ) : void

@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'22/06/2013'</value>
+      <value>'29/06/2013'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -45,6 +45,10 @@
     <define append="true">
       <name>CONFIG::stats</name>
       <value>true</value>
+    </define>
+    <define append="true">
+      <name>CONFIG::shapes</name>
+      <value>false</value>
     </define>
     <optimize>true</optimize>
     <omit-trace-statements>true</omit-trace-statements>

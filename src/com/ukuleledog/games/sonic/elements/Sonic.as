@@ -45,6 +45,11 @@ package com.ukuleledog.games.sonic.elements
 			this.scaleX = 2;
 			this.scaleY = 2;
 			addChild(_view);
+			
+			if ( CONFIG::debug && CONFIG::shapes ) {
+				_view.graphics.lineStyle( 1, 0xFF0000 );
+				_view.graphics.drawRect( 0, 0, this.width / 2, this.height / 2 );
+			}
 		}
 		
 		public function get waiting() : Boolean
@@ -64,6 +69,9 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function set jumping( value:Boolean ) : void
 		{
+			
+			trace( "jumping" );
+			
 			if ( value == true )
 				jump();
 			else
@@ -141,7 +149,7 @@ package com.ukuleledog.games.sonic.elements
 		{
 			this.x += _speed;
 			
-			if ( _jumping )
+			if ( _jumping || !_onGround )
 			animation = 'jumpball';
 			else if ( _speed == _speedRun )
 			animation = 'run';
@@ -160,7 +168,7 @@ package com.ukuleledog.games.sonic.elements
 		{
 			this.x -= _speed;
 			
-			if ( _jumping )
+			if ( _jumping || !_onGround )
 			animation = 'jumpball';
 			else if ( _speed == _speedRun )
 			animation = 'run';
@@ -177,9 +185,12 @@ package com.ukuleledog.games.sonic.elements
 		
 		public function jump() : void
 		{
-						
+			
 			if ( _onGround == true && _jumping == false )
 			{
+				
+				trace( "jumping 2" );
+				
 				_jumping = true;
 				_onGround = false;
 				animation = 'jump';

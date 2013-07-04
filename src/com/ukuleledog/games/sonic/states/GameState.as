@@ -89,28 +89,35 @@ package com.ukuleledog.games.sonic.states
 		private function loop( e:Event ) : void
 		{
 			
-			keyPressed = false;
+			try
+			{
+				
+				keyPressed = false;
+				
+				if ( pressedKeys[Keyboard.DOWN] == true ) {
+					_currentLevel.crouch();
+					keyPressed = true;
+				} else if ( pressedKeys[Keyboard.LEFT] == true ) {
+					_currentLevel.moveLeft();
+					keyPressed = true;
+				} else if ( pressedKeys[Keyboard.RIGHT] == true ) {
+					_currentLevel.moveRight();
+					keyPressed = true;
+				}
+				
+				if ( pressedKeys[Keyboard.SPACE] == true && !_currentLevel.sonic.crouching && !_currentLevel.sonic.jumping ) {
+					_currentLevel.jump();
+					keyPressed = true;
+				}
+				
+				if ( !keyPressed && !_currentLevel.sonic.waiting )
+					_currentLevel.sonic.animation = 'idle';
+				
+				_currentLevel.loop();
 			
-			if ( pressedKeys[Keyboard.DOWN] == true ) {
-				_currentLevel.crouch();
-				keyPressed = true;
-			} else if ( pressedKeys[Keyboard.LEFT] == true ) {
-				_currentLevel.moveLeft();
-				keyPressed = true;
-			} else if ( pressedKeys[Keyboard.RIGHT] == true ) {
-				_currentLevel.moveRight();
-				keyPressed = true;
+			} catch (e:Error) {
+				_currentLevel.addSign();
 			}
-			
-			if ( pressedKeys[Keyboard.SPACE] == true && !_currentLevel.sonic.crouching && !_currentLevel.sonic.jumping ) {
-				_currentLevel.jump();
-				keyPressed = true;
-			}
-			
-			if ( !keyPressed && !_currentLevel.sonic.waiting )
-				_currentLevel.sonic.animation = 'idle';
-			
-			_currentLevel.loop();
 			
 		}
 		
